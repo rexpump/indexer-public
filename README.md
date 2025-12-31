@@ -44,7 +44,7 @@ networks:
   zilliqa_testnet:
     name: zilliqa_testnet
     chain_id: 33101
-    rpc_url: "https://dev-api.zilliqa.com"
+    rpc_url: "https://api.testnet.zilliqa.com"
     start_block: 17820324
 
 clickhouse:
