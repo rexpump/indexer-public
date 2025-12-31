@@ -1,0 +1,252 @@
+# RexSwap Indexer Configuration
+# 
+# Each network is fully autonomous with its own:
+# - RPC endpoints and contracts
+# - Indexer settings (tracking, TTL, batching)
+# - API server port
+
+networks:
+  # Zilliqa EVM Mainnet (production)
+  zilliqa_mainnet:
+    name: zilliqa_mainnet
+    chain_id: 32769
+    rpc_url: "https://ssn.zilpay.io/api"
+    fallback_rpc_url: "https://api.zilliqa.com"
+    start_block: 15700000
+    
+    contracts:
+      rexswap_dex: "0x8630616b0198e7e449d0aad3603b73f665188025"
+      rexpump:
+        position_manager: "0x789d72235bff6215b37ecf0f8deaa8f43a92f0dc"
+        bidwall: "0x3d5052fc64dcec858fb178afec0011ee41f47f00"
+        fairlaunch: "0x2a0849e2773164031d877614bb8bd8c7e6a6cd9f"
+        fee_escrow: "0x58abe9779d3a3b399d9003b9d2675e65e76899fc"
+        rexpump_nft: "0xac9aa46d52d1e8c117a3b68ab013e51321544a6a"
+    
+    indexer:
+      batch_size: 50
+      batch_delay_ms: 100
+      poll_interval_ms: 1000
+      confirmations: 12
+      live_indexing: true
+      track_rexswap: true
+      track_rexpump: true
+      track_erc20: true
+      track_all_erc20: true
+      track_erc721: true
+      track_all_erc721: true
+      track_scilla_tokens: true
+      ttl:
+        erc20_transfers: 30
+        wallet_tokens: 0
+        erc721_transfers: 365
+        rexswap_swaps: 0
+        rexswap_pools: 0
+        rexswap_liquidity: 0
+        rexpump_swaps: 0
+        rexpump_pools: 0
+      retry:
+        max_retries: 10
+        initial_delay_secs: 30
+        max_delay_secs: 300
+        exponential_backoff: true
+        rpc_batch_blocks: 50
+        rpc_batch_transactions: 50
+    
+    api:
+      enabled: true
+      host: "0.0.0.0"
+      port: 8882
+      cors_origins: []
+
+  # Zilliqa EVM Testnet
+  zilliqa_testnet:
+    name: zilliqa_testnet
+    chain_id: 33101
+    rpc_url: "https://dev-api.zilliqa.com"
+    start_block: 17820324
+    
+    contracts:
+      rexswap_dex: "0x0000000000000000000000000000000000000000"
+    
+    indexer:
+      batch_size: 50
+      batch_delay_ms: 100
+      poll_interval_ms: 1000
+      confirmations: 12
+      live_indexing: true
+      track_rexswap: true
+      track_rexpump: false
+      track_erc20: true
+      track_all_erc20: true
+      track_erc721: true
+      track_all_erc721: true
+      track_scilla_tokens: true
+      ttl:
+        erc20_transfers: 30
+        wallet_tokens: 0
+        erc721_transfers: 365
+        rexswap_swaps: 0
+        rexswap_pools: 0
+        rexswap_liquidity: 0
+        rexpump_swaps: 0
+        rexpump_pools: 0
+      retry:
+        max_retries: 10
+        initial_delay_secs: 30
+        max_delay_secs: 300
+        exponential_backoff: true
+        rpc_batch_blocks: 50
+        rpc_batch_transactions: 50
+    
+    api:
+      enabled: true
+      host: "0.0.0.0"
+      port: 8883
+      cors_origins: []
+
+  # BSC Testnet
+  bsc_testnet:
+    name: bsc_testnet
+    chain_id: 97
+    rpc_url: "https://bsc-testnet-rpc.publicnode.com"
+    start_block: 0
+    
+    contracts:
+      rexswap_dex: "0x0000000000000000000000000000000000000000"
+    
+    indexer:
+      batch_size: 100
+      batch_delay_ms: 50
+      poll_interval_ms: 3000
+      confirmations: 15
+      live_indexing: true
+      track_rexswap: true
+      track_rexpump: false
+      track_erc20: true
+      track_all_erc20: true
+      track_erc721: true
+      track_all_erc721: true
+      track_scilla_tokens: false
+      ttl:
+        erc20_transfers: 90
+        wallet_tokens: 0
+        erc721_transfers: 365
+        rexswap_swaps: 0
+        rexswap_pools: 0
+        rexswap_liquidity: 0
+        rexpump_swaps: 0
+        rexpump_pools: 0
+      retry:
+        max_retries: 10
+        initial_delay_secs: 30
+        max_delay_secs: 300
+        exponential_backoff: true
+        rpc_batch_blocks: 100
+        rpc_batch_transactions: 100
+    
+    api:
+      enabled: true
+      host: "0.0.0.0"
+      port: 8884
+      cors_origins: []
+
+  # Ethereum Mainnet
+  mainnet:
+    name: mainnet
+    chain_id: 1
+    rpc_url: "https://eth-mainnet.g.alchemy.com/v2/YOUR_API_KEY"
+    start_block: 17361660
+    
+    contracts:
+      rexswap_dex: "0x0000000000000000000000000000000000000000"
+    
+    indexer:
+      batch_size: 50
+      batch_delay_ms: 100
+      poll_interval_ms: 12000
+      confirmations: 12
+      live_indexing: true
+      track_rexswap: true
+      track_rexpump: false
+      track_erc20: true
+      track_all_erc20: false
+      track_erc721: true
+      track_all_erc721: false
+      track_scilla_tokens: false
+      ttl:
+        erc20_transfers: 30
+        wallet_tokens: 0
+        erc721_transfers: 365
+        rexswap_swaps: 0
+        rexswap_pools: 0
+        rexswap_liquidity: 0
+        rexpump_swaps: 0
+        rexpump_pools: 0
+      retry:
+        max_retries: 10
+        initial_delay_secs: 30
+        max_delay_secs: 300
+        exponential_backoff: true
+        rpc_batch_blocks: 50
+        rpc_batch_transactions: 50
+    
+    api:
+      enabled: true
+      host: "0.0.0.0"
+      port: 8885
+      cors_origins: []
+
+  # Local development
+  local:
+    name: local
+    chain_id: 31337
+    rpc_url: "http://127.0.0.1:8545"
+    start_block: 0
+    
+    contracts:
+      rexswap_dex: "0x0000000000000000000000000000000000000000"
+    
+    indexer:
+      batch_size: 100
+      batch_delay_ms: 0
+      poll_interval_ms: 1000
+      confirmations: 1
+      live_indexing: true
+      track_rexswap: true
+      track_rexpump: true
+      track_erc20: true
+      track_all_erc20: true
+      track_erc721: true
+      track_all_erc721: true
+      track_scilla_tokens: false
+      ttl:
+        erc20_transfers: 0
+        wallet_tokens: 0
+        erc721_transfers: 0
+        rexswap_swaps: 0
+        rexswap_pools: 0
+        rexswap_liquidity: 0
+        rexpump_swaps: 0
+        rexpump_pools: 0
+      retry:
+        max_retries: 3
+        initial_delay_secs: 1
+        max_delay_secs: 10
+        exponential_backoff: false
+        rpc_batch_blocks: 100
+        rpc_batch_transactions: 100
+    
+    api:
+      enabled: true
+      host: "127.0.0.1"
+      port: 8880
+      cors_origins: []
+
+# ClickHouse connection (shared between all networks)
+clickhouse:
+  host: "localhost"
+  port: 8123
+  user: "default"
+  password: ""
+  database: "indexer"

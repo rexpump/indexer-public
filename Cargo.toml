@@ -1,0 +1,55 @@
+[package]
+name = "indexer"
+version = "0.1.0"
+edition = "2021"
+description = "Universal blockchain indexer for EVM chains (RexSwap, RexPump, ERC-20, ERC-721)"
+authors = ["RexSwap Team"]
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.41", features = ["full"] }
+
+# Ethereum/EVM
+alloy = { version = "1.1", features = ["full", "rlp", "serde"] }
+
+# ClickHouse
+clickhouse = { version = "0.13", features = ["lz4"] }
+
+# Configuration
+config = "0.14"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# HTTP client
+reqwest = { version = "0.12", features = ["json"] }
+
+# API Server
+axum = "0.8"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+# Utils
+thiserror = "2.0"
+anyhow = "1.0"
+hex = "0.4"
+dotenv = "0.15"
+chrono = { version = "0.4", features = ["serde"] }
+sha3 = "0.10"
+futures = "0.3"
+lazy_static = "1.5"
+async-trait = "0.1"
+
+[dev-dependencies]
+tokio-test = "0.4"
+
+[[bin]]
+name = "indexer"
+path = "src/main.rs"
+
