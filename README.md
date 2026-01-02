@@ -292,4 +292,4 @@ cargo clippy
 
 ## Лицензия
 
-MIT
+AGPL-3.0
